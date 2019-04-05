@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Timetable.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Timetable.Models;
+using System.Data;
 
 namespace Timetable
 {
@@ -34,9 +36,11 @@ namespace Timetable
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -63,11 +67,21 @@ namespace Timetable
 
             app.UseAuthentication();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "users",
+                    template: "{controller=Users}/{action=UserPage}/{id?}");
             });
         }
     }
