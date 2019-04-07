@@ -13,6 +13,27 @@ namespace Timetable.Data
             : base(options)
         {
             Database.EnsureCreated();
-        }      
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            string adminRoleName = "admin";
+            string studentRoleName = "student";
+            string professorRoleName = "professor";
+
+            string adminLogin = "admin";
+            string adminPassword = "123456";
+
+            // добавляем роли
+            Role adminRole = new Role { Id = 1, Type = adminRoleName };
+            Role studentRole = new Role { Id = 2, Type = studentRoleName };
+            Role professorRole = new Role { Id = 3, Type = professorRoleName };
+
+            //добавляем администратора
+            User adminUser = new User { Id = 1, Login = adminLogin, Password = adminPassword, IdRole = adminRole.Id };
+
+            modelBuilder.Entity<Role>().HasData(new Role[] { adminRole, studentRole, professorRole });
+            modelBuilder.Entity<User>().HasData(new User[] { adminUser });
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

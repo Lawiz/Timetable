@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Timetable.Models;
 using System.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Timetable
 {
@@ -36,6 +37,14 @@ namespace Timetable
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.AccessDeniedPath = "/Account/Login";
+                    options.Cookie.HttpOnly = true;
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                    options.LoginPath = "/Account/Login";
+                });
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
@@ -67,8 +76,7 @@ namespace Timetable
 
             app.UseAuthentication();
 
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
+            //app.UseDefaultFiles();
 
             app.UseMvc(routes =>
             {
@@ -77,12 +85,12 @@ namespace Timetable
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "users",
-                    template: "{controller=Users}/{action=Users}/{id?}");
-            });
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "users",
+            //        template: "{controller=Users}/{action=Users}/{id?}");
+            //});
         }
     }
 }

@@ -102,7 +102,7 @@ function DeleteUser(id) {
 }
 // создание строки для таблицы
 var row = function (user) {
-    console.log(user.login);
+
     return "<tr data-rowid='" + user.id + "'><td>" + user.id + "</td>" +
         "<td>" + user.login + "</td> <td>" + user.password + "</td>" + "</td> <td>" + user.idRole + "</td>" +
         "<td><a class='editLink' data-id='" + user.id + "'>Изменить</a> | " +
