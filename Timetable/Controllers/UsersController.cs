@@ -22,7 +22,7 @@ namespace Timetable.Controllers
         [HttpGet]
         public IEnumerable<User> GetUsers()
         {
-            return _context.Users;
+            return _context.Users.ToList();
         }
 
         // GET: api/Users/5
@@ -70,7 +70,7 @@ namespace Timetable.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return Ok(user);
         }
 
         // DELETE: api/Users/5

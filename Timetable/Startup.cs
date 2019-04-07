@@ -81,7 +81,7 @@ namespace Timetable
             {
                 routes.MapRoute(
                     name: "users",
-                    template: "{controller=Users}/{action=UserPage}/{id?}");
+                    template: "{controller=Users}/{action=Users}/{id?}");
             });
         }
     }
