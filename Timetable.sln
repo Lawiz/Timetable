@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2041
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timetable", "Timetable\Timetable.csproj", "{D7733022-2645-443A-9CA3-03B919B1E6DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timetable2", "Timetable2\Timetable2.csproj", "{6E41753B-1D36-4566-B712-E18BD2370488}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D7733022-2645-443A-9CA3-03B919B1E6DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7733022-2645-443A-9CA3-03B919B1E6DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7733022-2645-443A-9CA3-03B919B1E6DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E41753B-1D36-4566-B712-E18BD2370488}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E41753B-1D36-4566-B712-E18BD2370488}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E41753B-1D36-4566-B712-E18BD2370488}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E41753B-1D36-4566-B712-E18BD2370488}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -40,9 +40,7 @@ namespace Timetable
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
                 {
-                    options.AccessDeniedPath = "/Account/Login";
-                    options.Cookie.HttpOnly = true;
-                    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                    options.AccessDeniedPath = "Identity/Account/Login";
                     options.LoginPath = "/Account/Login";
                 });
 
@@ -72,7 +70,7 @@ namespace Timetable
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            //app.UseCookiePolicy();
 
             app.UseAuthentication();
 
@@ -80,6 +78,10 @@ namespace Timetable
 
             app.UseMvc(routes =>
             {
+                //routes.MapRoute(
+                //       name: "Timetable",
+                //       template: "{area:exists}/{controller=Home}/{action=Index}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

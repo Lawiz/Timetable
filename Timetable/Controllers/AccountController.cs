@@ -10,6 +10,7 @@ using Timetable.Models;
 
 namespace RolesApp.Controllers
 {
+    //[Area("Timetable")]
     public class AccountController : Controller
     {
         private ApplicationDbContext _context;
@@ -39,7 +40,7 @@ namespace RolesApp.Controllers
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
-            return View(model);
+            return View("Index", model);
         }
         private async Task Authenticate(User user)
         {

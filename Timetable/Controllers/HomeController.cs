@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +7,7 @@ using Timetable.Models;
 
 namespace Timetable.Controllers
 {
+    //[Area("Timetable")]
     public class HomeController : Controller
     {
         readonly ApplicationDbContext db;
@@ -17,13 +17,13 @@ namespace Timetable.Controllers
             db = context;
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Index()
         {
-            //string role = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultRoleClaimType).Value;
-            //return Content($"ваша роль: {role}");
             return View(await db.Users.ToListAsync());
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             return View();
@@ -81,7 +81,6 @@ namespace Timetable.Controllers
             return NotFound();
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(int? id)
         {
