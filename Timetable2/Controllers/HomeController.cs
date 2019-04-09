@@ -16,7 +16,7 @@ namespace Timetable2.Controllers
             db = context;
         }
 
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, student")]
         public async Task<IActionResult> Index()
         {
             return View(await db.Users.ToListAsync());
