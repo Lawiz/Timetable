@@ -39,6 +39,10 @@ namespace Timetable2
                 {
                     options.AccessDeniedPath = "/Account/Login";
                     options.LoginPath = "/Account/Login";
+                    options.Cookie.HttpOnly = true;
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                    options.SlidingExpiration = true;
                 });
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -64,18 +68,12 @@ namespace Timetable2
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            //app.UseCookiePolicy();
+            app.UseCookiePolicy();
 
             app.UseAuthentication();
 
-            //app.UseDefaultFiles();
-
             app.UseMvc(routes =>
             {
-                //routes.MapRoute(
-                //       name: "Timetable",
-                //       template: "{area:exists}/{controller=Home}/{action=Index}");
-
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

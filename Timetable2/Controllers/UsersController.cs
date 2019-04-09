@@ -27,6 +27,11 @@ namespace Timetable2.Controllers
             return _context.Users.ToList();
         }
 
+        public IEnumerable<Role> GetRoles()
+        {
+            return _context.Roles.ToList();
+        }
+
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser([FromRoute] int id)
