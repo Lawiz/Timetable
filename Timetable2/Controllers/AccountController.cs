@@ -21,7 +21,7 @@ namespace Timetable2.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            return View("Login");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -36,7 +36,15 @@ namespace Timetable2.Controllers
                 {
                     await Authenticate(user); // аутентификация
 
-                    return RedirectToAction("Index", "Home");
+                    int idrole = user.IdRole;
+
+                    switch (idrole)
+                    { 
+                    case 1: return RedirectToAction("IndexAdmin", "Home");
+                    case 2: return RedirectToAction("IndexStudent", "Home");
+                    case 3: return RedirectToAction("IndexProfessor", "Home");
+                    }
+
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }

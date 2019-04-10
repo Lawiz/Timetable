@@ -16,81 +16,27 @@ namespace Timetable2.Controllers
             db = context;
         }
 
-        [Authorize(Roles = "admin, student")]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await db.Users.ToListAsync());
+            return View("Index");
         }
 
         [Authorize(Roles = "admin")]
-        public IActionResult Create()
+        public IActionResult IndexAdmin()
         {
-            return View();
+            return View("IndexAdmin");
         }
 
-        [Authorize(Roles = "admin")]
-        [HttpPost]
-        public async Task<IActionResult> Create (User user)
+        [Authorize(Roles = "student")]
+        public IActionResult IndexStudent()
         {
-            db.Users.Add(user);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return View("IndexStudent");
         }
 
-        public async Task<IActionResult> Details(int? id)
+        [Authorize(Roles = "professor")]
+        public IActionResult IndexProfessor()
         {
-            if (id != null)
-            {
-                User user = await db.Users.FirstOrDefaultAsync(p => p.Id == id);
-                if (user != null)
-                    return View(user);
-            }
-            return NotFound();
-        }
-
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id != null)
-            {
-                User user = await db.Users.FirstOrDefaultAsync(p => p.Id == id);
-                if (user != null)
-                    return View(user);
-            }
-            return NotFound();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(User user)
-        {
-            db.Users.Update(user);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        [ActionName("Delete")]
-        public async Task<IActionResult> ConfirmDelete(int? id)
-        {
-            if (id != null)
-            {
-                User user = await db.Users.FirstOrDefaultAsync(p => p.Id == id);
-                if (user != null)
-                    return View(user);
-            }
-            return NotFound();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id != null)
-            {
-                User user = new User { Id = id.Value };
-                db.Entry(user).State = EntityState.Deleted;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return NotFound();
+            return View("IndexProfessor");
         }
     }
 }

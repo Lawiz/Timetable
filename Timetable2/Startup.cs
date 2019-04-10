@@ -72,15 +72,17 @@ namespace Timetable2
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}");
+                routes.MapRoute(
+                    name: "admin",
+                    template: "{controller=Home}/{action=IndexAdmin}");
+                routes.MapRoute(
+                    name: "student",
+                    template: "{controller=Home}/{action=IndexStudent}");
+                routes.MapRoute(
+                    name: "professor",
+                    template: "{controller=Home}/{action=IndexProfessor}");
             });
-
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "users",
-            //        template: "{controller=Users}/{action=Users}/{id?}");
-            //});
         }
     }
 }

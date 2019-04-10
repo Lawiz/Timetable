@@ -18,19 +18,15 @@ namespace Timetable2.Controllers
         public UsersController(ApplicationDbContext context)
         {
             _context = context;
-        }
+        }        
 
+        [Authorize(Roles = "admin")]
         // GET: api/Users
         [HttpGet]
         public IEnumerable<User> GetUsers()
         {
             return _context.Users.ToList();
         }
-
-        //public IEnumerable<Role> GetRoles()
-        //{
-        //    return _context.Roles.ToList();
-        //}
 
         // GET: api/Users/5
         [HttpGet("{id}")]
